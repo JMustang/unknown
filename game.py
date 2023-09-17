@@ -3,6 +3,9 @@ import sys
 import pygame
 
 from scrips.entities import PhysicsEntity
+from scrips.utils import load_image
+
+
 
 
 
@@ -18,6 +21,10 @@ class Game:
         
         self.movement = [False, False]
         
+        self.assets = {
+            'player': load_image('entities/player.png')
+        }
+        # '/Users/junior/Documents/www/python/games/unknown/data/images/entities/player.png'
         self.player = PhysicsEntity(self, 'player', (50, 50), (8, 15))
 
     def run(self):
