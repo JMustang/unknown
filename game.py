@@ -5,6 +5,7 @@ import pygame
 from scrips.entities import PhysicsEntity
 from scrips.utils import load_image, load_images
 from scrips.tilemap import Tilemap
+from scrips.clouds import Clouds
 
 
 class Game:
@@ -27,7 +28,10 @@ class Game:
             "stone": load_images("tiles/stone"),
             "player": load_image("entities/player.png"),
             "background": load_image("background.png"),
+            "clouds": load_images("clouds"),
         }
+
+        self.clouds = Clouds(self.assets["clouds"], count=16)
         # '/Users/junior/Documents/www/python/games/unknown/data/images/entities/player.png'
         self.player = PhysicsEntity(self, "player", (50, 50), (8, 15))
 
@@ -50,6 +54,9 @@ class Game:
                 - self.scroll[1]
             ) / 30
             render_scroll = (int(self.scroll[0]), int(self.scroll[1]))
+
+            self.clouds.update()
+            self.clouds.render(self.display, offset=render_scroll)
 
             self.tilemap.render(self.display, offset=render_scroll)
 
