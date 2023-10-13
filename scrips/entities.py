@@ -10,8 +10,18 @@ class PhysicsEntity:
         self.velocity = [0, 0]
         self.collisions = {"up": False, "down": False, "right": False, "left": False}
 
+        self.action = ""
+        self.anim_offset = (-3, -3)
+        self.flip = False
+        self.set_action("idle")
+
     def rect(self):
         return pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
+
+    def set_action(self, action):
+        if action != self.action:
+            self.action = action
+            self.animation = self.assets[self.e_type + "/" + self.action].copy()
 
     def update(self, tilemap, movement=(0, 0)):
         self.collisions = {"up": False, "down": False, "right": False, "left": False}
@@ -51,7 +61,8 @@ class PhysicsEntity:
             self.velocity[1] = 0
 
     def render(self, surf, offset=(0, 0)):
-        surf.blit(
-            self.game.assets["player"],
-            (self.pos[0] - offset[0], self.pos[1] - offset[1]),
-        )
+        surf.blit(pygame.transform.flip(self.animation.img(), self.flip, False))
+        # surf.blit(
+        #     self.game.assets["player"],
+        #     (self.pos[0] - offset[0], self.pos[1] - offset[1]),
+        # )
