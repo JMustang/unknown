@@ -2,7 +2,7 @@ import sys
 
 import pygame
 
-from scrips.entities import PhysicsEntity
+from scrips.entities import PhysicsEntity, Player
 from scrips.utils import load_image, load_images, Animation
 from scrips.tilemap import Tilemap
 from scrips.clouds import Clouds
@@ -38,7 +38,7 @@ class Game:
 
         self.clouds = Clouds(self.assets["clouds"], count=16)
         # '/Users/junior/Documents/www/python/games/unknown/data/images/entities/player.png'
-        self.player = PhysicsEntity(self, "player", (50, 50), (8, 15))
+        self.player = Player(self, (50, 50), (8, 15))
 
         self.tilemap = Tilemap(self, tile_size=16)
 
