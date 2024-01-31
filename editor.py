@@ -32,6 +32,10 @@ class Editor:
 
         self.scroll = [0, 0]
 
+        self.tile_list = list(self.assets)
+        self.tile_group = 0
+        self.tile_variant = 0
+
     def run(self):
         while True:
             self.display.fill((0, 0, 0))
