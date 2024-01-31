@@ -36,14 +36,30 @@ class Editor:
         self.tile_group = 0
         self.tile_variant = 0
 
+        self.clicking = False
+        self.right_clicking = False
+
     def run(self):
         while True:
             self.display.fill((0, 0, 0))
+
+            current_tile_img = self.assets[self.tile_list[self.tile_group]][self.tile_variant].copy()
+            current_tile_img.set_alpha(100)
+
+            self.display.blit(current_tile_img, (5, 5))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.clicking = True
+                    if event.button == 3:
+                        self.right_clicking = True
+
+
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
                         self.movement[0] = True
