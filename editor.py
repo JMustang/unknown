@@ -58,6 +58,10 @@ class Editor:
                         self.clicking = True
                     if event.button == 3:
                         self.right_clicking = True
+                    if event.button == 4:
+                        self.tile_group = (self.tile_group - 1) % len(self.tile_list)
+                    if event.button == 5:
+                        self.tile_group = (self.tile_group + 1) % len(self.tile_list)
 
 
                 if event.type == pygame.KEYDOWN:
