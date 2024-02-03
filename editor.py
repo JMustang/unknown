@@ -66,6 +66,10 @@ class Editor:
                     "variant": self.tile_variant,
                     "pos": tile_pos,
                 }
+            if self.right_clicking:
+                tile_loc = str(tile_pos[0]) + ";" + str(tile_pos[1])
+                if tile_loc in self.tilemap.tilemap:
+                    del self.tilemap.tilemap[tile_loc]
 
             self.display.blit(current_tile_img, (5, 5))
 
