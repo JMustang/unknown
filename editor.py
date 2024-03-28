@@ -39,6 +39,7 @@ class Editor:
         self.clicking = False
         self.right_clicking = False
         self.shift = False
+        self.ongrid = True
 
     def run(self):
         while True:
@@ -62,13 +63,16 @@ class Editor:
                 int((mpos[1] + self.scroll[1]) // self.tilemap.tile_size),
             )
 
-            self.display.blit(
-                current_tile_img,
-                (
-                    tile_pos[0] * self.tilemap.tile_size - self.scroll[0],
-                    tile_pos[1] * self.tilemap.tile_size - self.scroll[1],
-                ),
-            )
+            if self.ongrid:
+                self.display.blit(
+                    current_tile_img,
+                    (
+                        tile_pos[0] * self.tilemap.tile_size - self.scroll[0],
+                        tile_pos[1] * self.tilemap.tile_size - self.scroll[1],
+                    ),
+                )
+            else:
+                self.display.blit(current_tile_img, mpos)
 
             if self.clicking:
                 self.tilemap.tilemap[str(tile_pos[0]) + ";" + str(tile_pos[1])] = {
@@ -128,6 +132,8 @@ class Editor:
                         self.movement[2] = True
                     if event.key == pygame.K_s:
                         self.movement[3] = True
+                    if event.key == pygame.K_g:
+                        self.ongrid = not self.ongrid
                     if event.key == pygame.K_LSHIFT:
                         self.shift = True
                 if event.type == pygame.KEYUP:
